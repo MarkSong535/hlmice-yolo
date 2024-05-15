@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: tovitu-yolo-predict-new-homecage
+  name: mark-clone-of-tovitu-yolo-predict-new-homecage
 spec:
   backoffLimit: 0
   template:
@@ -9,7 +9,7 @@ spec:
       restartPolicy: Never  # Never | OnFailure
 
       containers:
-      - name: tovitu-container
+      - name: mark-clone-of-tovitu-container
         image: tovitu/hlmice-yolo:latest
         imagePullPolicy: Always
 
@@ -29,13 +29,13 @@ spec:
             
         env:
           - name: "SUBDIR"
-            value: "prey_capture"
+            value: "AJ1T06" #ChangeMe
           - name: "VIDEODIR"
             value: "s3://hengenlab/yolo_videos/"
           - name: "ENDPOINT"
             value: "https://s3-central.nrp-nautilus.io"
           - name: "MODELNAME"
-            value: "best.pt"
+            value: "homecage_best.pt" #ChangeMe best.pt or homecage_best.pt
           - name: "ID"
             value: "${ID}"
 
