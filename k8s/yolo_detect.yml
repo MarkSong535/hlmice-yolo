@@ -15,12 +15,14 @@ spec:
 
         resources:
           requests:
-            cpu: "1"
-            memory: "16Gi"
+            cpu: "7"
+            memory: "27Gi"
+            ephemeral-storage: "30Gi"
           limits:
             cpu: "8"
             memory: "32Gi"
             nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
 
         command: ["stdbuf", "-oL", "-eL", "/bin/bash", "-c"]
         args:

@@ -17,10 +17,12 @@ spec:
           requests:
             cpu: "1"
             memory: "64Gi"
+            ephemeral-storage: "40Gi"
           limits:
             cpu: "8"
             memory: "96Gi"
             nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
 
         command: ["stdbuf", "-oL", "-eL", "/bin/bash", "-c"]
         args:
