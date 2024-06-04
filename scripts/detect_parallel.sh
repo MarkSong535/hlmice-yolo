@@ -26,5 +26,5 @@ python scripts/post_process.py yolov5/runs/detect/exp/labels/ pdata/
 python scripts/compile_post_processed.py
 
 for file in $(ls | grep npy);do
-    aws --endpoint $ENDPOINT s3 cp ./${file} s3://hengenlab/yolo/results/${SUBDIR}/
+    aws --endpoint $ENDPOINT s3 cp ./${file} s3://hengenlab/yolo/results_mark/${SUBDIR}/
 done
