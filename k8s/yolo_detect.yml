@@ -10,7 +10,7 @@ spec:
 
       containers:
       - name: mark-clone-of-tovitu-container
-        image: tovitu/hlmice-yolo:latest
+        image: marksongtech/hl:0.0.1
         imagePullPolicy: Always
 
         resources:

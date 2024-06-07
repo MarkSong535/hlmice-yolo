@@ -3,6 +3,10 @@
 MAX_JOBS=3
 running_jobs=0
 
+echo ls /root/.aws/credentials
+echo "${VIDEODIR}"
+echo "${SUBDIR}"
+
 files=$(aws s3 --endpoint https://s3-central.nrp-nautilus.io ls ${VIDEODIR}${SUBDIR}/ | grep mp4 | awk '{print $4}')
 echo "Copying model checkpoint ${MODELNAME}"
 aws s3 --endpoint $ENDPOINT cp s3://hengenlab/yolo/model/${MODELNAME} /models/${MODELNAME}
