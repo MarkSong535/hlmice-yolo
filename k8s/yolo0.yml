@@ -42,8 +42,6 @@ spec:
             value: "${ID}"
           - name: "MAX_JOBS"
             value: "10"
-          - name: "MAX_JOBS"
-            value: "10"
 
         volumeMounts:
           - name: "prp-s3-credentials"
