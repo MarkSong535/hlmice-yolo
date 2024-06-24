@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: yolo-predict-00
+  name: yolo-predict-02
 spec:
   backoffLimit: 0
   template:
@@ -9,7 +9,7 @@ spec:
       restartPolicy: Never  # Never | OnFailure
 
       containers:
-      - name: yolo-predict-cont-00
+      - name: yolo-predict-cont-02
         image: marksongtech/hl:0.0.2
         imagePullPolicy: Always
 
@@ -31,7 +31,7 @@ spec:
             
         env:
           - name: "SUBDIR"
-            value: "ajv_00" #ChangeMe
+            value: "ajv_02" #ChangeMe
           - name: "VIDEODIR"
             value: "s3://hengenlab/yolo_videos/"
           - name: "ENDPOINT"

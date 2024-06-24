@@ -1,6 +1,6 @@
 #! /bin/bash
 
-MAX_JOBS=3
+
 running_jobs=0
 
 echo ls /root/.aws/credentials
@@ -17,7 +17,7 @@ for DATANAME in $files; do
     python yolov5/detect.py --exist-ok --weights /models/${MODELNAME} --source /datasets/${DATANAME} --save-txt --save-conf --nosave --device 0 &
     ((running_jobs++))
 
-    if [ "$running_jobs" -ge "$MAX_JOBS" ]; then
+    if [ "$running_jobs" -ge "${MAX_JOBS}" ]; then
     wait -n
     ((running_jobs--))
     fi
