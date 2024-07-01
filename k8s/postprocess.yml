@@ -19,7 +19,7 @@ spec:
             memory: "16Gi"
           limits:
             cpu: "8"
-            memory: "32Gi"
+            memory: "64Gi"
 
         command: ["stdbuf", "-oL", "-eL", "/bin/bash", "-c"]
         args:

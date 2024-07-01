@@ -13,7 +13,7 @@ spec:
         memory: "16Gi"
       limits:
         cpu: "8"
-        memory: "32Gi"
+        memory: "64Gi"
         nvidia.com/gpu: 1
     env:
       - name: "SUBDIR"
