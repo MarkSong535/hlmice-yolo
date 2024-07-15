@@ -4,9 +4,12 @@ ANIMAL=${ANIMAL}
 MAX_JOBS=${MAX_JOBS}
 running_jobs=0
 
-files=$(aws s3 --endpoint https://s3-central.nrp-nautilus.io ls ${VIDEODIR}${SUBDIR}/ | grep mp4 | grep  ${ANIMAL} | awk '{print $4}')
+files=$(aws s3 --endpoint https://s3-central.nrp-nautilus.io ls ${VIDEODIR}${SUBDIR}/ | grep mp4 | awk '{print $4}')
 echo "Copying model checkpoint ${MODELNAME}"
+
 aws s3 --endpoint $ENDPOINT cp s3://hengenlab/yolo/model/${MODELNAME} /models/${MODELNAME}
+
+aws s3 --endpoint $ENDPOINT cp s3://hengenlab/mark.song/dlc/${SUBDIR_DLC} /models/DLC --recursive
 
 for DATANAME in $files; do
     echo "Copying data ${DATANAME}"
@@ -22,6 +25,8 @@ for DATANAME in $files; do
 done
 
 wait
+
+aws s3 --endpoint $ENDPOINT cp /usr/src/app/yolov5/runs/detect/out/labels/ s3://hengenlab/mark.song/debug/ --recursive
 
 python scripts/compile_post_processed_new.py
 

@@ -13,7 +13,7 @@ ENV ENDPOINT="https://s3-central.nrp-nautilus.io"
 ENV S3_ENDPOINT="s3-central.nrp-nautilus.io"
 ENV S3_USE_HTTPS=1
 ENV AWS_LOG_LEVEL=3
-COPY . .
+COPY requirements.txt ./
 
 RUN apt-get update
 
@@ -48,4 +48,6 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN git clone https://github.com/ultralytics/yolov5
+
+COPY . .
 

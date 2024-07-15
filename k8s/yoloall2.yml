@@ -10,7 +10,7 @@ spec:
 
       containers:
       - name: yolo-predict-cont-11
-        image: marksongtech/hl:0.0.3
+        image: marksongtech/hl:0.0.5
         imagePullPolicy: Always
 
         resources:
@@ -30,7 +30,9 @@ spec:
             bash scripts/detect_parallel.sh;
             
         env:
-          - name: "SUBDIR"
+          - name: "SUBDIR" # Yolo Data
+            value: "aj_ris" #ChangeMe
+          - name: "SUBDIR_DLC" # DLC Data
             value: "aj_ris" #ChangeMe
           - name: "VIDEODIR"
             value: "s3://hengenlab/yolo_videos/"
@@ -38,8 +40,6 @@ spec:
             value: "https://s3-central.nrp-nautilus.io"
           - name: "MODELNAME"
             value: "homecage_best.pt" #ChangeMe best.pt or homecage_best.pt
-          - name: "ID"
-            value: "${ID}"
           - name: "MAX_JOBS"
             value: "10"
 
