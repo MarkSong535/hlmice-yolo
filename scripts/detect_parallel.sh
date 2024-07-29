@@ -26,8 +26,6 @@ done
 
 wait
 
-aws s3 --endpoint $ENDPOINT cp /usr/src/app/yolov5/runs/detect/out/labels/ s3://hengenlab/mark.song/debug/ --recursive
-
 python scripts/compile_post_processed_new.py
 
 for file in $(ls | grep npy);do

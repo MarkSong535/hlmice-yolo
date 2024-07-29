@@ -10,7 +10,7 @@ spec:
 
       containers:
       - name: yolo-predict-cont-10
-        image: marksongtech/hl:0.0.15_noball
+        image: marksongtech/hl:0.1.2_noball
         imagePullPolicy: Always
 
         resources:
@@ -31,7 +31,7 @@ spec:
             
         env:
           - name: "SUBDIR" # Yolo Data
-            value: "aj_ris_less" #ChangeMe
+            value: "aj_ris" #ChangeMe
           - name: "SUBDIR_DLC" # DLC Data
             value: "aj_ris" #ChangeMe
           - name: "VIDEODIR"
