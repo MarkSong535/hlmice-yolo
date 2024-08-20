@@ -1,5 +1,7 @@
 #! /bin/bash
 
+start_time=$(date +%s)
+
 ANIMAL=${ANIMAL}
 MAX_JOBS=${MAX_JOBS}
 running_jobs=0
@@ -9,12 +11,15 @@ echo "Copying model checkpoint ${MODELNAME}"
 
 aws s3 --endpoint $ENDPOINT cp s3://hengenlab/yolo/model/${MODELNAME} /models/${MODELNAME}
 
-aws s3 --endpoint $ENDPOINT cp s3://hengenlab/mark.song/dlc/${SUBDIR_DLC} /models/DLC --recursive
+if $DOWNLOAD_DLC; then
+    echo "Copying DLC model ${SUBDIR_DLC}"
+    aws s3 --endpoint $ENDPOINT cp s3://hengenlab/mark.song/dlc/${SUBDIR_DLC} /models/DLC --recursive
+fi
 
 for DATANAME in $files; do
     echo "Copying data ${DATANAME}"
     aws s3 --endpoint $ENDPOINT cp ${VIDEODIR}${SUBDIR}/${DATANAME} /datasets/${DATANAME}
-    python yolov5/detect.py --exist-ok --weights /models/${MODELNAME} --source /datasets/${DATANAME} --save-txt --save-conf --nosave --device 0 --name out &&
+    python yolov5/detect.py --exist-ok --weights /models/${MODELNAME} --source /datasets/${DATANAME} --save-txt --save-conf --device 0 --name out &&
     rm -f /datasets/${DATANAME} &
     ((running_jobs++))
 
@@ -26,10 +31,24 @@ done
 
 wait
 
-python scripts/compile_post_processed_new.py
+if [ "$POST_TYPE" = "roach" ]; then
+    python scripts/compile_post_processing_roach.py
+else
+    python scripts/compile_post_processed_new.py
+fi
 
 for file in $(ls | grep npy);do
     aws --endpoint $ENDPOINT s3 rm s3://hengenlab/yolo/results/${SUBDIR}/${file}
     aws --endpoint $ENDPOINT s3 cp ./${file} s3://hengenlab/yolo/results/${SUBDIR}/
 done
 
+for file in $(ls ./yolov5/runs/detect/out/ | grep mp4);do
+    aws --endpoint $ENDPOINT s3 cp ./yolov5/runs/detect/out/${file} s3://hengenlab/yolo/results/${SUBDIR}/cockroach/${file} --quiet
+done
+
+# aws --endpoint $ENDPOINT s3 cp ./yolov5/runs/detect/out/ s3://hengenlab/yolo/results/${SUBDIR}/cockroach/ --recursive --quiet
+
+end_time=$(date +%s)
+elapsed_time=$(( end_time - start_time ))
+
+echo "Elapsed time: $elapsed_time seconds"

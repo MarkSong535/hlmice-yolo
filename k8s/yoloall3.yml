@@ -10,7 +10,7 @@ spec:
 
       containers:
       - name: yolo-predict-cont-12
-        image: marksongtech/hl:0.1.10_roach_nsave
+        image: marksongtech/hl:0.1.10_roach
         imagePullPolicy: Always
 
         resources:
@@ -31,7 +31,7 @@ spec:
             
         env:
           - name: "SUBDIR" # Yolo Data
-            value: "mini" #ChangeMe
+            value: "prey_capture_complete_roach" #ChangeMe
           - name: "SUBDIR_DLC" # DLC Data
             value: "aj_ris" #ChangeMe
           - name: "VIDEODIR"

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: yolo-predict-12
+  name: yolo-predict-11
 spec:
   backoffLimit: 0
   template:
@@ -9,8 +9,8 @@ spec:
       restartPolicy: Never  # Never | OnFailure
 
       containers:
-      - name: yolo-predict-cont-12
-        image: marksongtech/hl:0.1.10_roach_nsave
+      - name: yolo-predict-cont-11
+        image: marksongtech/hl:0.1.9_roach_save
         imagePullPolicy: Always
 
         resources:
