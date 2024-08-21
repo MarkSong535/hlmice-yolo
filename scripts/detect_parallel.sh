@@ -33,6 +33,8 @@ wait
 
 if [ "$POST_TYPE" = "roach" ]; then
     python scripts/compile_post_processing_roach.py
+elif [ "$POST_TYPE" = "jmg" ]; then
+    python scripts/compile_post_processed_jmg.py
 else
     python scripts/compile_post_processed_new.py
 fi
