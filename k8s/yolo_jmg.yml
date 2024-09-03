@@ -45,7 +45,7 @@ spec:
           - name: "DOWNLOAD_DLC"
             value: "False"
           - name: "POST_TYPE"
-            value: "roach"
+            value: "jmg"
 
         volumeMounts:
           - name: "prp-s3-credentials"
